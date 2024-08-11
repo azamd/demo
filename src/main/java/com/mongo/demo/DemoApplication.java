@@ -46,7 +46,13 @@ public class DemoApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		// Clean up documents within the collection 'purchases'
+		PurchaseRepository.deleteAll();
 		
+		System.out.println("-------------CREATE PURCHASES-------------------------------\n");
+		
+		createPurchases();
+
 		System.out.println("\n----------------SHOW ALL PURCHASES---------------------------\n");
 		
 		showAllPurchases();
@@ -57,7 +63,7 @@ public class DemoApplication implements CommandLineRunner{
 		
 		System.out.println("\n-----------UPDATE PURCHASE NAME------------------------\n");
 		
-		updatePurchaseName(3,"Wooden Stuff");
+		updatePurchaseName(3,"maintenance tools");
 		
 		System.out.println("\n----------DELETE A PURCHASE----------------------------------\n");
 		
@@ -69,6 +75,27 @@ public class DemoApplication implements CommandLineRunner{
 		
 		System.out.println("\n-------------------THE END---------------------------");
 	}
+
+	
+	//CREATE
+	void createPurchases() {
+		System.out.println("Data creation started...");
+
+		PurchaseRepository.save(new Purchase(0,"clothes"));
+		PurchaseRepository.save(new Purchase(1,"electronics"));
+		PurchaseRepository.save(new Purchase(2,"toys"));
+		PurchaseRepository.save(new Purchase(3,"furniture"));
+		PurchaseRepository.save(new Purchase(4,"sports equipement"));
+		PurchaseRepository.save(new Purchase(5,"stationery"));
+		PurchaseRepository.save(new Purchase(6,"books"));
+		PurchaseRepository.save(new Purchase(7,"groceries"));
+		PurchaseRepository.save(new Purchase(8,"accessories"));
+		PurchaseRepository.save(new Purchase(9,"fast-food"));
+		PurchaseRepository.save(new Purchase(9,"gadgets"));
+	
+		System.out.println("Data creation complete...");
+	}
+	
 
 	// READ
 	// 1. Show all the data
