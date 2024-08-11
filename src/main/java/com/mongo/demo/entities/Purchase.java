@@ -1,15 +1,13 @@
-/*package com.mongo.demo.entities;
+package com.mongo.demo.entities;
 
-import javax.persistence.Entity;
-
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,16 +15,16 @@ import lombok.Setter;
 @Document("purchases")
 public class Purchase {
     @Id
-    private ObjectId _id;
+    private Integer id;
     private String purchase;
     
 
-    public ObjectId getId() {
-        return _id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId(ObjectId id) {
-        this._id = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPurchase() {
@@ -38,4 +36,4 @@ public class Purchase {
     }
 
   
-}*/
+}
