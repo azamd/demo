@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PurchaseRepository extends MongoRepository<Purchase,Integer> {
     
-    @Query("{name:'?0'}")
+    @Query("{_id:?0}")
     Purchase findPurchaseById(Integer id);
     
     @Query(value="{}", fields="{'_id' : 1, 'purchase' : 1}")
