@@ -13,7 +13,7 @@ public interface PurchaseRepository extends MongoRepository<Purchase,Integer> {
     @Query("{name:'?0'}")
     Purchase findPurchaseById(Integer id);
     
-    @Query
+    @Query(value="{}", fields="{'_id' : 1, 'purchase' : 1}")
     List<Purchase> findAll();
 
     public long count();
