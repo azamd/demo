@@ -95,7 +95,7 @@ public class DemoApplication implements CommandLineRunner{
 	
 	// UPDATE APPROACH 2: Using MongoTemplate
 	public void updatePurchaseName(Integer id, String newName) {
-		System.out.println("Updating name for purchase with id" + id);
+		System.out.println("Updating name for purchase with id:" + id);
 		CustomRepository.updatePurchaseName(id, newName);
 	}
 	
