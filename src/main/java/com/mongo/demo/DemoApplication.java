@@ -58,6 +58,14 @@ public class DemoApplication implements CommandLineRunner{
 		
 		deletePurchase(6);
 		
+		System.out.println("\n------------COUNT OF PURCHASES-------------------------\n");
+		
+		findCountOfPurchases();
+
+		System.out.println("\n------------EXTRA POPULATION WITH DOCUMENTS-------------------------\n");
+		
+		createExtraPurchases();
+
 		System.out.println("\n------------FINAL COUNT OF PURCHASES-------------------------\n");
 		
 		findCountOfPurchases();
@@ -85,6 +93,14 @@ public class DemoApplication implements CommandLineRunner{
 		System.out.println("Data creation complete...");
 	}
 	
+	//EXTRA POPULATION
+	void createExtraPurchases() {
+		System.out.println("Data extra population started...");
+		Integer i;
+	    for(i=10;i<200;i++)
+		{PurchaseRepository.save(new Purchase(i,"clothes"));}
+		System.out.println("Data extra population complete...");
+	}
 
 	// READ
 	// 1. Show all the data
