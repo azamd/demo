@@ -1,29 +1,29 @@
 package com.mongo.demo.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.bson.types.ObjectId;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("purchases")
 public class Purchase {
-    @Id
-    private Integer id;
+    
+    private ObjectId id;
     private String purchase;
     
 
-    public Integer getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

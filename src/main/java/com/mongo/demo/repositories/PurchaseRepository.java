@@ -1,22 +1,33 @@
 package com.mongo.demo.repositories;
+
 import java.util.List;
 
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.mongo.demo.entities.Purchase;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-
-public interface PurchaseRepository extends MongoRepository<Purchase,Integer> {
+@Repository
+public interface PurchaseRepository{
     
-    @Query("{_id:?0}")
-    Purchase findPurchaseById(Integer id);
-    
-    @Query(value="{}", fields="{'_id' : 1, 'purchase' : 1}")
+    Purchase save(Purchase purchase);
+
+    List<Purchase> saveAll(List<Purchase> purchases);
+
     List<Purchase> findAll();
 
-    public long count();
-    
+    Purchase findOne(String id);
+
+    long count();
+
+    long delete(String id);
+
+    long deleteAll();
+
+    void dropCollection();
+
+    Purchase update(Purchase purchase);
+
+
+
 
 }
