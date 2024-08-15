@@ -2,26 +2,26 @@ package com.mongo.demo.services;
 
 import java.util.List;
 
-import com.mongo.demo.dto.*;
+import com.mongo.demo.entities.*;
 
 
 public interface PurchaseService {
     
-    PurchaseDTO save(PurchaseDTO purchaseDTO);
+    Purchase save(Purchase purchase);
 
-    List<PurchaseDTO> saveAll(List<PurchaseDTO> purchases);
+    List<Purchase> saveAll(List<Purchase> purchases);
 
-    List<PurchaseDTO> findAll();
+    List<Purchase> findAll();
 
-    PurchaseDTO findOne(String id);
+    Purchase findOne(Purchase purchase);
 
     long count();
 
-    long delete(String id);
+    long delete(Purchase purchase);
 
     long deleteAll();
 
-    PurchaseDTO update(PurchaseDTO PurchaseDTO);
+    Purchase update(Purchase PurchaseDTO);
 
     void dropCollection();
     

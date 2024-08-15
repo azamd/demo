@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.BsonDocument;
-import org.bson.types.ObjectId;
+import org.bson.Document;
 import org.springframework.stereotype.Repository;
 
 
@@ -39,25 +39,23 @@ public class MongoPurchaseRepository implements PurchaseRepository {
 
      @PostConstruct
     void init() {
-        purchasesCollection = client.getDatabase("orders").getCollection("persons", Purchase.class);
+        purchasesCollection = client.getDatabase("orders").getCollection("purchases", Purchase.class);
     }   
     @Override
     public Purchase save(Purchase purchase) {
-        purchase.setId(new ObjectId());
+        //purchase.setId(0);
         purchasesCollection.insertOne(purchase);
         return purchase;
     }
 
     @Override
     public List<Purchase> saveAll(List<Purchase> purchases) {
-        try (ClientSession clientSession = client.startSession()) {
-            return clientSession.withTransaction(() -> {
-                purchases.forEach(p -> p.setId(new ObjectId()));
-                purchasesCollection.insertMany(clientSession, purchases);
+        
+                purchasesCollection.insertMany(purchases);
                 return purchases;
-            }, txnOptions);
-        }
-    }
+            };
+
+    
 
     @Override
     public List<Purchase> findAll() {
@@ -65,8 +63,9 @@ public class MongoPurchaseRepository implements PurchaseRepository {
     }
 
     @Override
-    public Purchase findOne(String id) {
-        return purchasesCollection.find(eq("_id", new ObjectId(id))).first();
+    public Purchase findOne(Purchase purchase) {
+        Document filter = new Document("_id", purchase.getId());
+        return purchasesCollection.find(filter).first();
     }
 
     @Override
@@ -75,8 +74,9 @@ public class MongoPurchaseRepository implements PurchaseRepository {
     }
 
     @Override
-    public long delete(String id) {
-        return purchasesCollection.deleteOne(eq("_id", new ObjectId(id))).getDeletedCount();
+    public long delete(Purchase purchase) {
+        Document filter = new Document("_id", purchase.getId());
+        return purchasesCollection.deleteOne(filter).getDeletedCount();
     }
 
     @Override

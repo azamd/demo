@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.mongo.demo.dto.PurchaseDTO;
+import com.mongo.demo.entities.Purchase;
 import com.mongo.demo.repositories.PurchaseRepository;
 
 @Service
@@ -17,23 +17,23 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public PurchaseDTO save(PurchaseDTO PurchaseDTO) {
-        return new PurchaseDTO(purchaseRepository.save(PurchaseDTO.toPurchase()));
+    public Purchase save(Purchase Purchase) {
+        return purchaseRepository.save(Purchase);
     }
 
     @Override
-    public List<PurchaseDTO> saveAll(List<PurchaseDTO> purchases) {
-        return purchases.stream().map(PurchaseDTO::toPurchase).peek(purchaseRepository::save).map(PurchaseDTO::new).toList();
+    public List<Purchase> saveAll(List<Purchase> purchases) {
+        return purchaseRepository.saveAll(purchases);
     }
 
     @Override
-    public List<PurchaseDTO> findAll() {
-        return purchaseRepository.findAll().stream().map(PurchaseDTO::new).toList();
+    public List<Purchase> findAll() {
+        return purchaseRepository.findAll();
     }
 
     @Override
-    public PurchaseDTO findOne(String id) {
-        return new PurchaseDTO(purchaseRepository.findOne(id));
+    public Purchase findOne(Purchase purchase) {
+        return purchaseRepository.findOne(purchase);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public long delete(String id) {
-        return purchaseRepository.delete(id);
+    public long delete(Purchase purchase) {
+        return purchaseRepository.delete(purchase);
     }
 
 
@@ -53,8 +53,8 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public PurchaseDTO update(PurchaseDTO PurchaseDTO) {
-        return new PurchaseDTO(purchaseRepository.update(PurchaseDTO.toPurchase()));
+    public Purchase update(Purchase Purchase) {
+        return (purchaseRepository.update(Purchase));
     }
 
    

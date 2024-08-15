@@ -3,15 +3,13 @@ package com.mongo.demo.controllers;
 
 import java.util.List;
 import com.mongo.demo.services.*;
-import com.mongo.demo.dto.*;
+import com.mongo.demo.entities.*;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,26 +34,24 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
 
     @PostMapping("purchase")
     @ResponseStatus(HttpStatus.CREATED)
-    public PurchaseDTO postPurchase(@RequestBody PurchaseDTO PurchaseDTO) {
-        return purchaseService.save(PurchaseDTO);
+    public Purchase postPurchase(@RequestBody Purchase Purchase) {
+        return purchaseService.save(Purchase);
     }
 
     @PostMapping("purchases")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<PurchaseDTO> postPurchases(@RequestBody List<PurchaseDTO> purchases) {
+    public List<Purchase> postPurchases(@RequestBody List<Purchase> purchases) {
         return purchaseService.saveAll(purchases);
     }
 
     @GetMapping("purchases")
-    public List<PurchaseDTO> getPurchases() {
+    public List<Purchase> getPurchases() {
         return purchaseService.findAll();
     }
 
-    @GetMapping("purchase/{id}")
-    public ResponseEntity<PurchaseDTO> getPurchase(@PathVariable String id) {
-        PurchaseDTO PurchaseDTO = purchaseService.findOne(id);
-        if (PurchaseDTO == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        return ResponseEntity.ok(PurchaseDTO);
+    @GetMapping("purchase_byId")
+    public Purchase getPurchase(@RequestBody Purchase Purchase) {
+        return purchaseService.findOne(Purchase);
     }
 
 
@@ -64,9 +60,9 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
         return purchaseService.count();
     }
 
-    @DeleteMapping("purchase/{id}")
-    public Long deletePurchase(@PathVariable String id) {
-        return purchaseService.delete(id);
+    @DeleteMapping("purchase_byId")
+    public Long deletePurchase(@RequestBody Purchase Purchase) {
+        return purchaseService.delete(Purchase);
     }
 
     @DeleteMapping("purchases")
@@ -75,8 +71,8 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
     }
 
     @PutMapping("purchase")
-    public PurchaseDTO updatePurchase(@RequestBody PurchaseDTO PurchaseDTO) {
-        return purchaseService.update(PurchaseDTO);
+    public Purchase updatePurchase(@RequestBody Purchase Purchase) {
+        return purchaseService.update(Purchase);
     }
 
     @GetMapping("purchases/drop")

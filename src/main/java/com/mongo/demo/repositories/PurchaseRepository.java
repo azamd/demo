@@ -15,11 +15,11 @@ public interface PurchaseRepository{
 
     List<Purchase> findAll();
 
-    Purchase findOne(String id);
+    Purchase findOne(Purchase purchase);
 
     long count();
 
-    long delete(String id);
+    long delete(Purchase purchase);
 
     long deleteAll();
 

@@ -6,24 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import org.bson.types.ObjectId;
-
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Purchase {
     
-    private ObjectId id;
+    private int id;
     private String purchase;
     
 
-    public ObjectId getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(int id) {
         this.id = id;
     }
 
