@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api")
 public class PurchaseController {
 
 

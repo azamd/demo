@@ -2,9 +2,12 @@ package com.mongo.demo.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.mongo.demo.dto.PurchaseDTO;
 import com.mongo.demo.repositories.PurchaseRepository;
 
+@Service
 public class PurchaseServiceImpl implements PurchaseService{
 
     private final PurchaseRepository purchaseRepository;
