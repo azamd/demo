@@ -15,7 +15,6 @@ public class Purchase {
     private int id;
     private String purchase;
     
-
     public int getId() {
         return id;
     }
@@ -31,6 +30,5 @@ public class Purchase {
     public void setPurchase(String purchase) {
         this.purchase = purchase;
     }
-
   
 }
