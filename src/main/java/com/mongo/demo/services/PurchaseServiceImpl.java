@@ -2,6 +2,7 @@ package com.mongo.demo.services;
 
 import java.util.List;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.mongo.demo.entities.Purchase;
@@ -62,5 +63,13 @@ public class PurchaseServiceImpl implements PurchaseService{
     public void dropCollection() {
         purchaseRepository.dropCollection();
     }
+
+    @Override
+    @Scheduled(fixedRate = 2000)
+    public void saveper2sec(Purchase purchase) {
+        purchaseRepository.save(purchase);
+    }
+
+    
     
 }

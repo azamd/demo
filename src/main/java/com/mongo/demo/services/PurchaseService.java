@@ -9,6 +9,8 @@ public interface PurchaseService {
     
     Purchase save(Purchase purchase);
 
+    void saveper2sec(Purchase purchase);
+
     List<Purchase> saveAll(List<Purchase> purchases);
 
     List<Purchase> findAll();

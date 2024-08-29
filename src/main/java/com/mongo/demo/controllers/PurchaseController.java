@@ -38,6 +38,12 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
         return purchaseService.save(Purchase);
     }
 
+    @PostMapping("purchase2")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void postPurchase2(@RequestBody Purchase Purchase) {
+        purchaseService.saveper2sec(Purchase);
+    }
+
     @PostMapping("purchases")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Purchase> postPurchases(@RequestBody List<Purchase> purchases) {
@@ -86,5 +92,7 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
         LOGGER.error("Internal server error.", e);
         return e;
     }
+
+
 
 }
