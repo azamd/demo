@@ -28,8 +28,9 @@ public interface PurchaseRepository{
 
     Purchase update(Purchase purchase);
 
-    List<Bson> firstPipeline();
+    void firstPipeline();
 
+    void secondPipeline();
 
 
 

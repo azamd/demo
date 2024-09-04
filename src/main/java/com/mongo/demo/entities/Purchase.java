@@ -1,6 +1,9 @@
 package com.mongo.demo.entities;
 
 import java.util.Date;
+import java.util.List;
+
+import org.bson.types.ObjectId;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,21 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Purchase {
     
-    private int id;
+    private ObjectId id;
     private String purchase;
     private String color;
     private float price;
     private Date date = new Date();
-    private int size[];
+    private List<String> size;
 
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getPurchase() {
         return purchase;

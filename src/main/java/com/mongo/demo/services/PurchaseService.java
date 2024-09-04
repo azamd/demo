@@ -29,6 +29,9 @@ public interface PurchaseService {
 
     void dropCollection();
 
-    List<Bson> firstPipeline();
+    void firstPipeline();
+
+    void secondPipeline();
+
     
 }

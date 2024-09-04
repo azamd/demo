@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.bson.BsonDocument;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.stereotype.Repository;
 
 
@@ -105,7 +104,9 @@ public class MongoPurchaseRepository implements PurchaseRepository {
     }
 
     @Override
-    public List<Bson> firstPipeline() { return Arrays.asList(
+    public void firstPipeline() { 
+        
+    purchasesCollection.aggregate( Arrays.asList(
     
     Aggregates.match(Filters.exists("size", true)),
 
@@ -121,8 +122,24 @@ public class MongoPurchaseRepository implements PurchaseRepository {
     Aggregates.sort(Sorts.orderBy(Sorts.ascending("purchases.price"), Sorts.descending("purchases.date"))),
 
 
-    Aggregates.group("$_id", Accumulators.push("sortedPurchases", "$purchases"))
+    Aggregates.group("$_id", Accumulators.push("sortedPurchases", "$purchases")) )
     
 );}
+    
+    @Override
+    public void secondPipeline() { purchasesCollection.aggregate( Arrays.asList(
+        
+        Aggregates.match(Filters.exists("size", true)),
+
+        Aggregates.group("$size", Accumulators.push("purchases", 
+        new Document("purchase", "$purchase")
+            .append("color", "$color")
+            .append("price", "$price")
+            .append("date", "$date")
+            .append("size", "$size"))),
+
+        Aggregates.group("$_id", Accumulators.push("sortedPurchases", "$purchases"))
+    
+)); }
 
 }

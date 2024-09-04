@@ -72,8 +72,13 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public List<Bson> firstPipeline() {
-       return purchaseRepository.firstPipeline();
+    public void firstPipeline() {
+        purchaseRepository.firstPipeline();
+    }
+
+    @Override
+    public void secondPipeline() {
+        purchaseRepository.secondPipeline();
     }
 
     
