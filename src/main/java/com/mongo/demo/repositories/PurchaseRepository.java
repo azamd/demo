@@ -2,6 +2,7 @@ package com.mongo.demo.repositories;
 
 import java.util.List;
 
+import org.bson.conversions.Bson;
 import org.springframework.stereotype.Repository;
 
 import com.mongo.demo.entities.Purchase;
@@ -19,13 +20,15 @@ public interface PurchaseRepository{
 
     long count();
 
-    long delete(Purchase purchase);
+    long delete(int id);
 
     long deleteAll();
 
     void dropCollection();
 
     Purchase update(Purchase purchase);
+
+    List<Bson> firstPipeline();
 
 
 

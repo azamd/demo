@@ -2,6 +2,8 @@ package com.mongo.demo.services;
 
 import java.util.List;
 
+import org.bson.conversions.Bson;
+
 import com.mongo.demo.entities.*;
 
 
@@ -9,7 +11,7 @@ public interface PurchaseService {
     
     Purchase save(Purchase purchase);
 
-    void saveper2sec(Purchase purchase);
+    Purchase saveper2sec(Purchase purchase);
 
     List<Purchase> saveAll(List<Purchase> purchases);
 
@@ -19,12 +21,14 @@ public interface PurchaseService {
 
     long count();
 
-    long delete(Purchase purchase);
+    long delete(int id);
 
     long deleteAll();
 
     Purchase update(Purchase PurchaseDTO);
 
     void dropCollection();
+
+    List<Bson> firstPipeline();
     
 }

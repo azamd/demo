@@ -2,6 +2,7 @@ package com.mongo.demo.services;
 
 import java.util.List;
 
+import org.bson.conversions.Bson;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -43,8 +44,8 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public long delete(Purchase purchase) {
-        return purchaseRepository.delete(purchase);
+    public long delete(int id) {
+        return purchaseRepository.delete(id);
     }
 
 
@@ -66,8 +67,13 @@ public class PurchaseServiceImpl implements PurchaseService{
 
     @Override
     @Scheduled(fixedRate = 2000)
-    public void saveper2sec(Purchase purchase) {
-        purchaseRepository.save(purchase);
+    public Purchase saveper2sec(Purchase purchase) {
+        return purchaseRepository.save(purchase);
+    }
+
+    @Override
+    public List<Bson> firstPipeline() {
+       return purchaseRepository.firstPipeline();
     }
 
     

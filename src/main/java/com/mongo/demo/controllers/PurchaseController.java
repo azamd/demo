@@ -3,6 +3,8 @@ package com.mongo.demo.controllers;
 
 import java.util.List;
 import com.mongo.demo.services.*;
+
+
 import com.mongo.demo.entities.*;
 
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,8 +43,8 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
 
     @PostMapping("purchase2")
     @ResponseStatus(HttpStatus.CREATED)
-    public void postPurchase2(@RequestBody Purchase Purchase) {
-        purchaseService.saveper2sec(Purchase);
+    public Purchase postPurchase2(@RequestBody Purchase Purchase) {
+        return purchaseService.saveper2sec(Purchase);
     }
 
     @PostMapping("purchases")
@@ -66,9 +69,9 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
         return purchaseService.count();
     }
 
-    @DeleteMapping("purchase_byId")
-    public Long deletePurchase(@RequestBody Purchase Purchase) {
-        return purchaseService.delete(Purchase);
+    @DeleteMapping("purchase/{id}")
+    public Long deletePurchase(@PathVariable int id) {
+        return purchaseService.delete(id);
     }
 
     @DeleteMapping("purchases")
@@ -93,6 +96,10 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
         return e;
     }
 
+    @GetMapping("purchases/pricedate_sorted_samecolor_clothes")
+    public void pricedate_sorted_samecolor_clothes(){
+        purchaseService.firstPipeline();
+    }
 
 
 }

@@ -2,10 +2,12 @@ package com.mongo.demo.repositories;
 
 import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bson.BsonDocument;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.springframework.stereotype.Repository;
 
 
@@ -16,11 +18,14 @@ import com.mongodb.TransactionOptions;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.ClientSession;
 import com.mongodb.client.MongoClient;
+import com.mongodb.client.model.Accumulators;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
+import com.mongodb.client.model.Sorts;
+
 import static com.mongodb.client.model.ReturnDocument.AFTER;
-
-
 import jakarta.annotation.PostConstruct;
 
 @Repository
@@ -74,8 +79,8 @@ public class MongoPurchaseRepository implements PurchaseRepository {
     }
 
     @Override
-    public long delete(Purchase purchase) {
-        Document filter = new Document("_id", purchase.getId());
+    public long delete(int id) {
+        Document filter = new Document("_id", id);
         return purchasesCollection.deleteOne(filter).getDeletedCount();
     }
 
@@ -99,8 +104,25 @@ public class MongoPurchaseRepository implements PurchaseRepository {
         System.out.println("purchases Collection is dropped.");
     }
 
+    @Override
+    public List<Bson> firstPipeline() { return Arrays.asList(
+    
+    Aggregates.match(Filters.exists("size", true)),
+
+    Aggregates.group("$color", Accumulators.push("purchases", 
+        new Document("purchase", "$purchase")
+            .append("color", "$color")
+            .append("price", "$price")
+            .append("date", "$date")
+            .append("size", "$size"))),
+
+    Aggregates.unwind("$purchases"),
+
+    Aggregates.sort(Sorts.orderBy(Sorts.ascending("purchases.price"), Sorts.descending("purchases.date"))),
 
 
+    Aggregates.group("$_id", Accumulators.push("sortedPurchases", "$purchases"))
     
-    
+);}
+
 }

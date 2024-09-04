@@ -1,5 +1,6 @@
 package com.mongo.demo.entities;
 
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,11 @@ public class Purchase {
     
     private int id;
     private String purchase;
+    private String color;
+    private float price;
+    private Date date = new Date();
+    private int size[];
+
     
     public int getId() {
         return id;
