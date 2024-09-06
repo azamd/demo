@@ -1,8 +1,6 @@
 package com.mongo.demo.services;
 
 import java.util.List;
-
-import org.bson.conversions.Bson;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -72,13 +70,13 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public void firstPipeline() {
-        purchaseRepository.firstPipeline();
+    public List<Purchase> firstPipeline() {
+        return purchaseRepository.firstPipeline();
     }
 
     @Override
-    public void secondPipeline() {
-        purchaseRepository.secondPipeline();
+    public List<Purchase> secondPipeline() {
+        return purchaseRepository.secondPipeline();
     }
 
     

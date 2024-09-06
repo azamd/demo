@@ -104,7 +104,7 @@ public class MongoPurchaseRepository implements PurchaseRepository {
     }
 
     @Override
-    public void firstPipeline() { 
+    public List<Purchase> firstPipeline() { 
         
     purchasesCollection.aggregate( Arrays.asList(
     
@@ -124,10 +124,14 @@ public class MongoPurchaseRepository implements PurchaseRepository {
 
     Aggregates.group("$_id", Accumulators.push("sortedPurchases", "$purchases")) )
     
-);}
+);
+
+return purchasesCollection.find().into(new ArrayList<>());
+
+}
     
     @Override
-    public void secondPipeline() { purchasesCollection.aggregate( Arrays.asList(
+    public List<Purchase> secondPipeline() { purchasesCollection.aggregate( Arrays.asList(
         
         Aggregates.match(Filters.exists("size", true)),
 
@@ -140,6 +144,9 @@ public class MongoPurchaseRepository implements PurchaseRepository {
 
         Aggregates.group("$_id", Accumulators.push("sortedPurchases", "$purchases"))
     
-)); }
+)); 
+
+return purchasesCollection.find().into(new ArrayList<>());
+}
 
 }

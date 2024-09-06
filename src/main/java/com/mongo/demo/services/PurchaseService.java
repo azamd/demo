@@ -2,8 +2,6 @@ package com.mongo.demo.services;
 
 import java.util.List;
 
-import org.bson.conversions.Bson;
-
 import com.mongo.demo.entities.*;
 
 
@@ -29,9 +27,9 @@ public interface PurchaseService {
 
     void dropCollection();
 
-    void firstPipeline();
+    List<Purchase> firstPipeline();
 
-    void secondPipeline();
+    List<Purchase> secondPipeline();
 
     
 }

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.bson.conversions.Bson;
 import org.slf4j.Logger;
 
 @RestController
@@ -95,12 +94,12 @@ private final static Logger LOGGER = LoggerFactory.getLogger(PurchaseController.
     }
 
     @GetMapping("purchases/pricedate_sorted_samecolor_purchases")
-    public List<Bson> pricedate_sorted_samecolor_clothes(){
-        return purchaseService.firstPipeline();
+    public List<Purchase> pricedate_sorted_samecolor_clothes(){
+         return purchaseService.firstPipeline();
     }
 
     @GetMapping("purchases/size_grouped_purchases")
-    public List<Bson> size_grouped_clothes(){
+    public List<Purchase> size_grouped_clothes(){
         return purchaseService.secondPipeline();
     }
 

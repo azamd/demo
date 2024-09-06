@@ -2,7 +2,6 @@ package com.mongo.demo.repositories;
 
 import java.util.List;
 
-import org.bson.conversions.Bson;
 import org.springframework.stereotype.Repository;
 
 import com.mongo.demo.entities.Purchase;
@@ -28,9 +27,9 @@ public interface PurchaseRepository{
 
     Purchase update(Purchase purchase);
 
-    void firstPipeline();
+    List<Purchase> firstPipeline();
 
-    void secondPipeline();
+    List<Purchase> secondPipeline();
 
 
 
